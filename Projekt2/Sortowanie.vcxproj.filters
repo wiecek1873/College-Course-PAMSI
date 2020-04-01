@@ -32,9 +32,6 @@
     <ClInclude Include="Testy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IntroSort.h">
       <Filter>Header Files</Filter>
     </ClInclude>

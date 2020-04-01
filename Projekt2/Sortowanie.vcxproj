@@ -157,7 +157,6 @@
     <ClInclude Include="HeapSort.h" />
     <ClInclude Include="InsertionSort.h" />
     <ClInclude Include="IntroSort.h" />
-    <ClInclude Include="Menu.h" />
     <ClInclude Include="MergeSort.h" />
     <ClInclude Include="PaczkaTablic.h" />
     <ClInclude Include="QuickSort.h" />

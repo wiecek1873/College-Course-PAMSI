@@ -1,4 +1,4 @@
-#pragma once
+#pragma once 
 #include "PaczkaTablic.h"
 
 template<typename T>

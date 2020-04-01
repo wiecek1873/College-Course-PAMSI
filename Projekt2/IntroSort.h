@@ -1,7 +1,7 @@
 #pragma once
 #include <math.h>
 #include "HeapSort.h"
-#include "InsertionSort.h"
+#include "InsertionSort.h" 
 
 template<typename T>
 class IntroSort

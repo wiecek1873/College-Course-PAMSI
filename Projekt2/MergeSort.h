@@ -7,7 +7,6 @@ class MergeSort
 	void Scal(T tablica[], int pierwszyIndeks, int os, int ostatniIndeks);
 public:
 	void mergeSort(T tablica[], int pierwszyIndeks, int ostatniIndeks);
-	void mergeSort(PaczkaTablic<T>* paczka);
 };
 
 template<typename T>
@@ -68,19 +67,5 @@ void MergeSort<T>::mergeSort(T tablica[], int pierwszyIndeks, int ostatniIndeks)
 		mergeSort(tablica, os + 1, ostatniIndeks);
 
 		Scal(tablica, pierwszyIndeks, os, ostatniIndeks);
-	}
-}
-
-template<typename T>
-void MergeSort<T>::mergeSort(PaczkaTablic<T>* paczka)
-{
-	int liczbaWielkosci = paczka->LiczbaDlugosci();
-	int iloscTablic = paczka->IloscTablic();
-	for (int i = 0; i < liczbaWielkosci; i++)
-	{
-		for (int j = 0; j < iloscTablic; j++)
-		{
-			mergeSort((*paczka)(i, j), 0, paczka->DlugoscTablicy(i) - 1);
-		}
 	}
 }

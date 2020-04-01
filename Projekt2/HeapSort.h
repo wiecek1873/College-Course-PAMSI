@@ -5,7 +5,7 @@ class HeapSort
 {
 	void Zamien(T& a, T& b);
 public:
-	void TworzKopiec(T* tablica, int rozmiar, int szczyt);
+	void TworzKopiec(T* tablica, int rozmiar, int szczyt); 
 	void heapSort(T* tablica, int pierwszyIndeks, int ostatniIndeks);
 };
 
