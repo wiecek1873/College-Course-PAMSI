@@ -1,5 +1,5 @@
 #pragma once
-#include "QuickSort.h"
+#include "QuickSort.h" 
 
 template <typename T>
 void TworzKopiec(T* tablica, int rozmiar, int szczyt)

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdlib.h> 
-#include <fstream>
-
+#include <fstream> 
 #include "Testy.h"
 
 using namespace std;

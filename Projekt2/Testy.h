@@ -5,7 +5,7 @@
 #include "IntroSort.h"
 #include"PaczkaTablic.h"
 #include"QuickSort.h"
-#include"MergeSort.h"
+#include"MergeSort.h" 
 using namespace std;
 
 template<typename T>

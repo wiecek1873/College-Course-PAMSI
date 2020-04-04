@@ -1,5 +1,5 @@
 #pragma once 
-#include "PaczkaTablic.h"
+#include "PaczkaTablic.h" 
 
 template<typename T>
 void Zamien(T& a, T& b)
