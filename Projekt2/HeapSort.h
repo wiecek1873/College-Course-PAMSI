@@ -1,24 +1,8 @@
 #pragma once
+#include "QuickSort.h"
 
 template <typename T>
-class HeapSort
-{
-	void Zamien(T& a, T& b);
-public:
-	void TworzKopiec(T* tablica, int rozmiar, int szczyt); 
-	void heapSort(T* tablica, int pierwszyIndeks, int ostatniIndeks);
-};
-
-template<typename T>
-void HeapSort<T>::Zamien(T& a, T& b)
-{
-	T temp = a;
-	a = b;
-	b = temp;
-}
-
-template <typename T>
-void HeapSort<T>::TworzKopiec(T* tablica, int rozmiar, int szczyt)
+void TworzKopiec(T* tablica, int rozmiar, int szczyt)
 {
 	int najwiekszy = szczyt;
 	int lewy = 2 * szczyt + 1;
@@ -40,7 +24,7 @@ void HeapSort<T>::TworzKopiec(T* tablica, int rozmiar, int szczyt)
 }
 
 template <typename T>
-void HeapSort<T>::heapSort(T* tablica, int pierwszyIndeks, int ostatniIndeks) {
+void heapSort(T* tablica, int pierwszyIndeks, int ostatniIndeks) {
 	++ostatniIndeks;
 
 	T* temp = new T[ostatniIndeks - pierwszyIndeks];

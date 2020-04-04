@@ -78,7 +78,6 @@ template<typename T>
 void Testy<T>::TestQuickSort()
 {
 	PaczkaTablic<T>* paczka = new PaczkaTablic<T>(_dlugosciTablic, _ilosc, _liczbaDlugosci);
-	QuickSort<T>* quickSort = new QuickSort<T>();
 
 	fstream plik;
 	plik.open("QuickSort.txt", ios::out);
@@ -89,7 +88,7 @@ void Testy<T>::TestQuickSort()
 		{
 			auto start = chrono::high_resolution_clock::now();
 
-			quickSort->quickSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
+			quickSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
 
 			auto stop = chrono::high_resolution_clock::now();
 			auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -101,15 +100,13 @@ void Testy<T>::TestQuickSort()
 	if (!CzyPosortowaneCalaPaczka(paczka, true))
 		plik << "Poprzedni test zle wykonany!!!!!!" << endl;
 	delete paczka;
-	delete quickSort;
 	plik << "=================================================" << endl;
 	
 	double ilePosortowac[] = { 0.25, 0.5, 0.75, 0.95, 0.99, 0.997};
 	for (int k = 0; k < 6; k++)
 	{
 		paczka = new PaczkaTablic<T>(_dlugosciTablic, _ilosc, _liczbaDlugosci);
-		quickSort = new QuickSort<T>();
-		quickSort->quickSort(paczka, ilePosortowac[k]);
+		quickSort(paczka, ilePosortowac[k]);
 
 		for (int i = 0; i < _liczbaDlugosci; i++)
 		{
@@ -117,7 +114,7 @@ void Testy<T>::TestQuickSort()
 			{
 				auto start = chrono::high_resolution_clock::now();
 
-				quickSort->quickSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
+				quickSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
 
 				auto stop = chrono::high_resolution_clock::now();
 				auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -129,13 +126,11 @@ void Testy<T>::TestQuickSort()
 			plik << "Poprzedni test zle wykonany!!!!!!" << endl;
 		plik << endl;
 		delete paczka;
-		delete quickSort;
 	}
 	plik << "=================================================" << endl;
 	
 	paczka = new PaczkaTablic<T>(_dlugosciTablic, _ilosc, _liczbaDlugosci);
-	quickSort = new QuickSort<T>();
-	quickSort->quickSort(paczka);
+	quickSort(paczka);
 	paczka->ObrocTablice();
 	if (!CzyPosortowaneCalaPaczka(paczka, false))
 		plik << "Problem z obrotem tablicy!!!!!!!" << endl;
@@ -145,7 +140,7 @@ void Testy<T>::TestQuickSort()
 		{
 			auto start = chrono::high_resolution_clock::now();
 
-			quickSort->quickSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
+			quickSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
 
 			auto stop = chrono::high_resolution_clock::now();
 			auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -157,7 +152,6 @@ void Testy<T>::TestQuickSort()
 	if (!CzyPosortowaneCalaPaczka(paczka, true))
 		plik << "Poprzedni test zle wykonany!!!!!!" << endl;
 	delete paczka;
-	delete quickSort;
 	plik << "=================================================" << endl;
 	plik.close();
 }
@@ -167,8 +161,6 @@ void Testy<T>::TestMergeSort()
 
 {
 	PaczkaTablic<T>* paczka = new PaczkaTablic<T>(_dlugosciTablic, _ilosc, _liczbaDlugosci);
-	QuickSort<T>* quickSort = new QuickSort<T>();
-	MergeSort<T>* mergeSort = new MergeSort<T>();
 
 	fstream plik;
 	plik.open("MergeSort.txt", ios::out);
@@ -179,7 +171,7 @@ void Testy<T>::TestMergeSort()
 		{
 			auto start = chrono::high_resolution_clock::now();
 
-			mergeSort->mergeSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
+			mergeSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
 
 			auto stop = chrono::high_resolution_clock::now();
 			auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -192,17 +184,13 @@ void Testy<T>::TestMergeSort()
 		plik << "Poprzedni test zle wykonany!!!!!!" << endl;
 
 	delete paczka;
-	delete quickSort;
-	delete mergeSort;
 	plik << "=================================================" << endl;
 
 	double ilePosortowac[] = { 0.25, 0.5, 0.75, 0.95, 0.99, 0.997 };
 	for (int k = 0; k < 6; k++)
 	{
 		paczka = new PaczkaTablic<T>(_dlugosciTablic, _ilosc, _liczbaDlugosci);
-		quickSort = new QuickSort<T>();
-		mergeSort = new MergeSort<T>();
-		quickSort->quickSort(paczka, ilePosortowac[k]);
+		quickSort(paczka, ilePosortowac[k]);
 
 		for (int i = 0; i < _liczbaDlugosci; i++)
 		{
@@ -210,7 +198,7 @@ void Testy<T>::TestMergeSort()
 			{
 				auto start = chrono::high_resolution_clock::now();
 
-				mergeSort->mergeSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
+				mergeSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
 
 				auto stop = chrono::high_resolution_clock::now();
 				auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -222,15 +210,11 @@ void Testy<T>::TestMergeSort()
 			plik << "Poprzedni test zle wykonany!!!!!!" << endl;
 		plik << endl;
 		delete paczka;
-		delete quickSort;
-		delete mergeSort;
 	}
 	plik << "=================================================" << endl;
 
 	paczka = new PaczkaTablic<T>(_dlugosciTablic, _ilosc, _liczbaDlugosci);
-	quickSort = new QuickSort<T>();
-	mergeSort = new MergeSort<T>();
-	quickSort->quickSort(paczka);
+	quickSort(paczka);
 	paczka->ObrocTablice();
 	if (!CzyPosortowaneCalaPaczka(paczka, false))
 		plik << "Problem z obrotem tablicy!!!!!!!" << endl;
@@ -241,7 +225,7 @@ void Testy<T>::TestMergeSort()
 		{
 			auto start = chrono::high_resolution_clock::now();
 
-			mergeSort->mergeSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
+			mergeSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
 
 			auto stop = chrono::high_resolution_clock::now();
 			auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -253,8 +237,6 @@ void Testy<T>::TestMergeSort()
 	if (!CzyPosortowaneCalaPaczka(paczka, true))
 		plik << "Poprzedni test zle wykonany!!!!!!" << endl;
 	delete paczka;
-	delete quickSort;
-	delete mergeSort;
 	plik << "=================================================" << endl;
 	plik.close();
 }
@@ -263,8 +245,6 @@ template<typename T>
 void Testy<T>::TestIntroSort()
 {
 	PaczkaTablic<T>* paczka = new PaczkaTablic<T>(_dlugosciTablic, _ilosc, _liczbaDlugosci);
-	QuickSort<T>* quickSort = new QuickSort<T>();
-	IntroSort<T>* introSort = new IntroSort<T>();
 
 	fstream plik;
 	plik.open("IntroSort.txt", ios::out);
@@ -275,7 +255,7 @@ void Testy<T>::TestIntroSort()
 		{
 			auto start = chrono::high_resolution_clock::now();
 
-			introSort->introSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
+			introSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
 
 			auto stop = chrono::high_resolution_clock::now();
 			auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -287,17 +267,13 @@ void Testy<T>::TestIntroSort()
 	if (!CzyPosortowaneCalaPaczka(paczka, true))
 		plik << "Poprzedni test zle wykonany!!!!!!" << endl;
 	delete paczka;
-	delete quickSort;
-	delete introSort;
 	plik << "=================================================" << endl;
 
 	double ilePosortowac[] = { 0.25, 0.5, 0.75, 0.95, 0.99, 0.997 };
 	for (int k = 0; k < 6; k++)
 	{
 		paczka = new PaczkaTablic<T>(_dlugosciTablic, _ilosc, _liczbaDlugosci);
-		quickSort = new QuickSort<T>();
-		introSort = new IntroSort<T>();
-		quickSort->quickSort(paczka, ilePosortowac[k]);
+		quickSort(paczka, ilePosortowac[k]);
 
 		for (int i = 0; i < _liczbaDlugosci; i++)
 		{
@@ -305,7 +281,7 @@ void Testy<T>::TestIntroSort()
 			{
 				auto start = chrono::high_resolution_clock::now();
 
-				introSort->introSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
+				introSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
 
 				auto stop = chrono::high_resolution_clock::now();
 				auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -317,15 +293,11 @@ void Testy<T>::TestIntroSort()
 			plik << "Poprzedni test zle wykonany!!!!!!" << endl;
 		plik << endl;
 		delete paczka;
-		delete quickSort;
-		delete introSort;
 	}
 	plik << "=================================================" << endl;
 
 	paczka = new PaczkaTablic<T>(_dlugosciTablic, _ilosc, _liczbaDlugosci);
-	quickSort = new QuickSort<T>();
-	introSort = new IntroSort<T>();
-	quickSort->quickSort(paczka);
+	quickSort(paczka);
 	paczka->ObrocTablice();
 	if (!CzyPosortowaneCalaPaczka(paczka, false))
 		plik << "Problem z obrotem tablicy!!!!!!!" << endl;
@@ -335,7 +307,7 @@ void Testy<T>::TestIntroSort()
 		{
 			auto start = chrono::high_resolution_clock::now();
 
-			introSort->introSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
+			introSort((*paczka)(i, j), 0, (_dlugosciTablic)[i] - 1);
 
 			auto stop = chrono::high_resolution_clock::now();
 			auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -347,8 +319,6 @@ void Testy<T>::TestIntroSort()
 	if (!CzyPosortowaneCalaPaczka(paczka, true))
 		plik << "Poprzedni test zle wykonany!!!!!!" << endl;
 	delete paczka;
-	delete quickSort;
-	delete introSort;
 	plik << "=================================================" << endl;
 	plik.close();
 }

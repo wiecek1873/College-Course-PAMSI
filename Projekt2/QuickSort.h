@@ -2,20 +2,40 @@
 #include "PaczkaTablic.h"
 
 template<typename T>
-class QuickSort
+void Zamien(T& a, T& b)
 {
-	int PodzielTablice(T tablica[], int pierwszyIndeks, int ostatniIndeks);
-	void Zamien(T& a, T& b);
-public:
-	void quickSort(T tablica[], int pierwszyIndeks, int ostatniIndeks);
-	void quickSort(PaczkaTablic<T>* paczka);
-	void quickSort(PaczkaTablic<T>* paczka, double ilePosortowac);
-};
+	T temp = a;
+	a = b;
+	b = temp;
+}
 
 template<typename T>
-int QuickSort<T>::PodzielTablice(T tablica[], int pierwszyIndeks, int ostatniIndeks)
+T& MedianaZTrzech(T tablica[], int pierwszy, int ostatni)
 {
-	T os = tablica[(ostatniIndeks + pierwszyIndeks) / 2];
+	int srodkowy = (ostatni + pierwszy) / 2;
+	if (tablica[pierwszy] < tablica[srodkowy] && tablica[srodkowy] < tablica[ostatni])
+		return tablica[srodkowy];
+
+	if (tablica[pierwszy] < tablica[ostatni] && tablica[ostatni] <= tablica[srodkowy])
+		return tablica[ostatni];
+
+	if (tablica[srodkowy] <= tablica[pierwszy] && tablica[pierwszy] < tablica[ostatni])
+		return tablica[pierwszy];
+
+	if (tablica[srodkowy] < tablica[ostatni] && tablica[ostatni] <= tablica[pierwszy])
+		return tablica[ostatni];
+
+	if (tablica[ostatni] <= tablica[pierwszy] && tablica[pierwszy] < tablica[srodkowy])
+		return tablica[pierwszy];
+
+	if (tablica[ostatni] <= tablica[srodkowy] && tablica[srodkowy] <= tablica[pierwszy])
+		return tablica[srodkowy];
+}
+
+template<typename T>
+int PodzielTablice(T tablica[], int pierwszyIndeks, int ostatniIndeks)
+{
+	T os = MedianaZTrzech(tablica,pierwszyIndeks,ostatniIndeks);
 	int i = pierwszyIndeks - 1;
 	int j = ostatniIndeks + 1;
 	while (true) 
@@ -39,15 +59,7 @@ int QuickSort<T>::PodzielTablice(T tablica[], int pierwszyIndeks, int ostatniInd
 }
 
 template<typename T>
-void QuickSort<T>::Zamien(T& a, T& b)
-{
-	T temp = a;
-	a = b;
-	b = temp;
-}
-
-template<typename T>
-void QuickSort<T>::quickSort(T tablica[], int pierwszyIndeks, int ostatniIndeks)
+void quickSort(T tablica[], int pierwszyIndeks, int ostatniIndeks)
 {
 	if (pierwszyIndeks < ostatniIndeks)
 	{
@@ -58,7 +70,7 @@ void QuickSort<T>::quickSort(T tablica[], int pierwszyIndeks, int ostatniIndeks)
 }
 
 template<typename T>
-void QuickSort<T>::quickSort(PaczkaTablic<T>* paczka)
+void quickSort(PaczkaTablic<T>* paczka)
 {
 	int liczbaWielkosci = paczka->LiczbaDlugosci();
 	int iloscTablic = paczka->IloscTablic();
@@ -72,7 +84,7 @@ void QuickSort<T>::quickSort(PaczkaTablic<T>* paczka)
 }
 
 template<typename T>
-void QuickSort<T>::quickSort(PaczkaTablic<T>* paczka, double ilePosortowac)
+void quickSort(PaczkaTablic<T>* paczka, double ilePosortowac)
 {
 	int liczbaWielkosci = paczka->LiczbaDlugosci();
 	int iloscTablic = paczka->IloscTablic();

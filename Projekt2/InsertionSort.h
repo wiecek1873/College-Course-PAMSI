@@ -1,23 +1,8 @@
 #pragma once
+#include "QuickSort.h"
 
 template<typename T>
-class InsertionSort
-{
-	void Zamien(T& a, T& b);
-public:
-	void insertionSort(T* tablica, int pierwszyIndeks, int ostatniIndeks);
-};
-
-template<typename T>
-void InsertionSort<T>::Zamien(T& a, T& b)
-{
-	T temp = a;
-	a = b;
-	b = temp;
-}
-
-template<typename T>
-void InsertionSort<T>::insertionSort(T* tablica, int pierwszyIndeks, int ostatniIndeks)
+void insertionSort(T* tablica, int pierwszyIndeks, int ostatniIndeks)
 {
 	ostatniIndeks++;
 	int i = pierwszyIndeks;

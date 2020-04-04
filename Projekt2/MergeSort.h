@@ -2,15 +2,7 @@
 #include "PaczkaTablic.h"
 
 template<typename T>
-class MergeSort
-{
-	void Scal(T tablica[], int pierwszyIndeks, int os, int ostatniIndeks);
-public:
-	void mergeSort(T tablica[], int pierwszyIndeks, int ostatniIndeks);
-};
-
-template<typename T>
-void MergeSort<T>::Scal(T tablica[], int pierwszyIndeks, int os, int ostatniIndeks)
+void Scal(T tablica[], int pierwszyIndeks, int os, int ostatniIndeks)
 {
 	int i, j, k;
 	int n1 = os - pierwszyIndeks + 1;
@@ -57,7 +49,7 @@ void MergeSort<T>::Scal(T tablica[], int pierwszyIndeks, int os, int ostatniInde
 }
 
 template<typename T>
-void MergeSort<T>::mergeSort(T tablica[], int pierwszyIndeks, int ostatniIndeks)
+void mergeSort(T tablica[], int pierwszyIndeks, int ostatniIndeks)
 {
 	if (pierwszyIndeks < ostatniIndeks)
 	{
