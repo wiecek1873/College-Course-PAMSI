@@ -10,7 +10,7 @@ void Zamien(T& a, T& b)
 }
 
 template<typename T>
-T& MedianaZTrzech(T tablica[], int pierwszy, int ostatni)
+T& MedianaZTrzech(T* tablica, int pierwszy, int ostatni)
 {
 	int srodkowy = (ostatni + pierwszy) / 2;
 	if (tablica[pierwszy] < tablica[srodkowy] && tablica[srodkowy] < tablica[ostatni])
@@ -33,7 +33,7 @@ T& MedianaZTrzech(T tablica[], int pierwszy, int ostatni)
 }
 
 template<typename T>
-int PodzielTablice(T tablica[], int pierwszyIndeks, int ostatniIndeks)
+int PodzielTablice(T* tablica, int pierwszyIndeks, int ostatniIndeks)
 {
 	T os = MedianaZTrzech(tablica,pierwszyIndeks,ostatniIndeks);
 	int i = pierwszyIndeks - 1;
@@ -59,7 +59,7 @@ int PodzielTablice(T tablica[], int pierwszyIndeks, int ostatniIndeks)
 }
 
 template<typename T>
-void quickSort(T tablica[], int pierwszyIndeks, int ostatniIndeks)
+void quickSort(T* tablica, int pierwszyIndeks, int ostatniIndeks)
 {
 	if (pierwszyIndeks < ostatniIndeks)
 	{

@@ -2,7 +2,7 @@
 #include "PaczkaTablic.h"
 
 template<typename T>
-void Scal(T tablica[], int pierwszyIndeks, int os, int ostatniIndeks)
+void Scal(T* tablica, int pierwszyIndeks, int os, int ostatniIndeks)
 {
 	int i, j, k;
 	int n1 = os - pierwszyIndeks + 1;
@@ -49,7 +49,7 @@ void Scal(T tablica[], int pierwszyIndeks, int os, int ostatniIndeks)
 }
 
 template<typename T>
-void mergeSort(T tablica[], int pierwszyIndeks, int ostatniIndeks)
+void mergeSort(T* tablica, int pierwszyIndeks, int ostatniIndeks)
 {
 	if (pierwszyIndeks < ostatniIndeks)
 	{
