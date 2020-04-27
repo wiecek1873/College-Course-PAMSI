@@ -1,23 +1,19 @@
 #pragma once
-#include "AdjacencyList.h"
+#include "AdjacencyMatrix.h"
 #include "PriorityQueue.h"
-#define infinity 2147483647
-#define undefined -1
 
-
-
-std::vector<int> dijkstra(GraphBase& graph, int source)
+std::pair<std::vector<int>,std::vector<int>> dijkstra(GraphBase& graph, int source)
 {
-	std::vector<int> distance(graph._numberOfVerticies);
-	std::vector<int> previous(graph._numberOfVerticies);
+	std::vector<int> distance(graph._numberOfVertices);
+	std::vector<int> previous(graph._numberOfVertices);
 	PriorityQueue Q;
 	distance[source] = 0;
-	for (int i = 0; i < graph._numberOfVerticies; ++i)
+	for (int i = 0; i < graph._numberOfVertices; ++i)
 	{
 		if (i != source)
 		{
-			distance[i] = infinity;
-			previous[i] = undefined;
+			distance[i] = INT_MAX;
+			previous[i] = -1;
 		}
 		Q.push(std::make_pair(distance[i], i));
 	}
@@ -36,5 +32,5 @@ std::vector<int> dijkstra(GraphBase& graph, int source)
 			}
 		}
 	}
-	return distance, previous;
+	return make_pair(distance,previous);
 }

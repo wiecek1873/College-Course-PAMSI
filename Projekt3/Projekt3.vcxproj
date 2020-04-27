@@ -152,18 +152,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AdjacencyList.cpp" />
+    <ClCompile Include="AdjacencyMatrix.cpp" />
     <ClCompile Include="PriorityQueue.cpp" />
     <ClCompile Include="Projekt3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdjacencyList.h" />
+    <ClInclude Include="AdjacencyMatrix.h" />
     <ClInclude Include="Dijkstra.h" />
     <ClInclude Include="GraphBase.h" />
     <ClInclude Include="PriorityQueue.h" />
-    <ClInclude Include="resource.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Projekt3.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,8 +1,8 @@
 #include "AdjacencyList.h"
-AdjacencyList::AdjacencyList(int numberOfVerticies)
+AdjacencyList::AdjacencyList(int numberOfVertices)
 { 
-	_adjacencyList.resize(numberOfVerticies);
-	_numberOfVerticies = numberOfVerticies; 
+	_adjacencyList.resize(numberOfVertices);
+	_numberOfVertices = numberOfVertices; 
 }
 
 void AdjacencyList::addEdge(int u, int v, int weight)

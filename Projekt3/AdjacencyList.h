@@ -13,7 +13,7 @@ class AdjacencyList : public GraphBase
 	std::vector<NeighboursList> _adjacencyList;
 
 public:
-	AdjacencyList(int numberOfVerticies);
+	AdjacencyList(int numberOfVertices);
 	virtual void addEdge(int u, int v, int weight) override;
 	virtual void deleteEdge(int u, int v) override;
 	virtual std::vector<int> neighbours(int u) override;

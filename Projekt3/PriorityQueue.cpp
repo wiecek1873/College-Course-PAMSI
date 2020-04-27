@@ -10,7 +10,6 @@ void PriorityQueue::push(pi element)
 		auto top = *(container.end() - 1);
 		container.pop_back();
 		return top;
-
 	}
 	bool PriorityQueue::empty()
 	{
@@ -22,5 +21,9 @@ void PriorityQueue::push(pi element)
 	void PriorityQueue::decreasePriority(int which, int value)
 	{
 		auto it = std::find_if(container.begin(), container.end(), [which](const pi& pair) { return which == pair.second; });
+
+		if (container.end() == it)
+			throw std::exception("Not found edge");
+
 		(*it).first = value;
 	}
