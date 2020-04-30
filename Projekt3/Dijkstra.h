@@ -12,10 +12,10 @@ std::pair<std::vector<int>,std::vector<int>> dijkstra(GraphBase& graph, int sour
 	{
 		if (i != source)
 		{
-			distance[i] = INT_MAX;
+			distance[i] = 100000; //Nie ustawiam tutaj INT_MAX poniewa¿ mogê póŸniej wyjœæ za zakres int-a
 			previous[i] = -1;
 		}
-		Q.push(std::make_pair(distance[i], i));
+		Q.push(std::make_pair(distance[i], i)); //First is distance. Second is vertex index
 	}
 	while (!Q.empty())
 	{

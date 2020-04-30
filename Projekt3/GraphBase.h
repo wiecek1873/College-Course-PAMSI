@@ -23,7 +23,8 @@ public:
 					addEdge(i, j, rand() % 100);
 			}
 		}
-		int numberOfEdges = (int)(1 * _numberOfVertices * (_numberOfVertices - 1));
+		
+		int numberOfEdges = (int)( _numberOfVertices * (_numberOfVertices - 1));
 		int numberOfEdgesToDelete = numberOfEdges - (int)(density * _numberOfVertices * (_numberOfVertices - 1));
 		while (numberOfEdgesToDelete > 0)
 		{

@@ -7,7 +7,7 @@ class AdjacencyMatrix : public GraphBase
 		std::vector<int> vector;
 		int numberOfColumns;
 	public:
-		Matrix(int n, int m, int defaultValue = -1) : numberOfColumns {n} { vector.resize(n * m, defaultValue); }
+		Matrix(int n, int m, int defaultValue = -1) : numberOfColumns{ n } { vector.resize(n * m,defaultValue);}
 		int& operator()(int x, int y) { return vector[x * numberOfColumns + y]; }
 	};
 

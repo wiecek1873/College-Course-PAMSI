@@ -1,4 +1,5 @@
-#include "Dijkstra.h"
+#include "Tests.h"
+
 
 
 
@@ -6,25 +7,15 @@ using namespace std;
 
 int main()
 {
-	AdjacencyMatrix adj(100);
-	adj.fillRandom(0.25);
+
+	Tests<AdjacencyList> xd;
+	xd.testDijkstraTime();
+	Tests<AdjacencyMatrix> xd1;
+	xd1.testDijkstraTime();
+	
 
 	
-	/*
-	AdjacencyList adj(5);
-	adj.addEdge(0, 1, 2);
-	adj.addEdge(0, 3, 4);
-	adj.addEdge(1, 2, 3);
-	adj.addEdge(1, 3, 3);
-	adj.addEdge(2, 4, 2);
-	adj.addEdge(3, 2, 3);
-	adj.addEdge(3, 4, 4);
-	auto xd = dijkstra(adj, 0);
-	for (int i = 0; i < 5; ++i)
-	{
-		cout << xd[i] << " ";
-	}
-	*/
+	
 	/*
 	AdjacencyList adjList(10);
 	adjList.addEdge(0, 1 ,10);
