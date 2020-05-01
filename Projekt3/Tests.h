@@ -1,5 +1,6 @@
 #pragma once
 #include <chrono>
+#include <fstream>
 #include "Dijkstra.h"
 
 template <typename T>
@@ -38,8 +39,16 @@ double Tests<T>::testRandomDijkstra(int numberOfVertices, float density)
 template <typename T>
 void Tests<T>::testDijkstraTime()
 {
+	std::ofstream file;
+	if (typeid(T) == typeid(AdjacencyList))
+		file.open("List.txt",ios::out);
+	else
+		file.open("Matrix.txt",ios::out);
+
+	int stage = 1; //Display of progression
 	int sizes[] = {10,50,100,500,1000};
 	float densities[] = {0.25,0.5,0.75,1};
+
 	for (int size : sizes)
 	{
 		for (float density : densities)
@@ -48,9 +57,12 @@ void Tests<T>::testDijkstraTime()
 			for (int i = 0; i < 100; i++)
 			{
 				temp.push_back(testRandomDijkstra(size,density));
+				std::cout << "Stage: " << stage << "/20 " << "Done: " << i << "%" << "\r" << std::flush;
 			}
-			std::cout << average(temp) << " ";
+			++stage;
+			file << average(temp) << " ";
 		}
-		std::cout << std::endl;
+		file << std::endl;
 	}
+	file.close();
 }

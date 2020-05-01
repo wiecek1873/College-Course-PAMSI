@@ -7,6 +7,7 @@ typedef std::pair<int, int> pi; //Type to contain distance to vertex as first ar
 
 class PriorityQueue
 {
+public:
 	std::vector<pi> container;
 public:
 	void push(pi element);

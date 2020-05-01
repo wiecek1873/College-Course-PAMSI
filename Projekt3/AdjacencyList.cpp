@@ -20,6 +20,8 @@ void AdjacencyList::deleteEdge(int u, int v)
 
 std::vector<int> AdjacencyList::neighbours(int u)
 {
+	//1,2,3,4,5
+	//2,4,6,8,10
 	std::vector<int> neighboursVec;
 	NeighboursList& neighboursList = _adjacencyList[u];
 	std::transform(neighboursList.begin(), neighboursList.end(), std::back_inserter(neighboursVec),
