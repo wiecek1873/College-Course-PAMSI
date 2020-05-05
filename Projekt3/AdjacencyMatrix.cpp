@@ -1,6 +1,5 @@
 #include "AdjacencyMatrix.h"
 
-
 AdjacencyMatrix::AdjacencyMatrix(int numberOfVertices): _matrix(numberOfVertices,numberOfVertices)
 {
 	_numberOfVertices = numberOfVertices;

@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="AdjacencyList.cpp" />
     <ClCompile Include="AdjacencyMatrix.cpp" />
+    <ClCompile Include="GraphBase.cpp" />
     <ClCompile Include="PriorityQueue.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

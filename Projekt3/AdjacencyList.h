@@ -9,9 +9,7 @@ class AdjacencyList : public GraphBase
 		int weight;
 	};
 	using NeighboursList = std::vector<Adjacency>;
-
 	std::vector<NeighboursList> _adjacencyList;
-
 public:
 	AdjacencyList(int numberOfVertices);
 	virtual void addEdge(int u, int v, int weight) override;

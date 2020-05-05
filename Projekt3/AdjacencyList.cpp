@@ -1,4 +1,5 @@
 #include "AdjacencyList.h"
+
 AdjacencyList::AdjacencyList(int numberOfVertices)
 { 
 	_adjacencyList.resize(numberOfVertices);
@@ -20,8 +21,6 @@ void AdjacencyList::deleteEdge(int u, int v)
 
 std::vector<int> AdjacencyList::neighbours(int u)
 {
-	//1,2,3,4,5
-	//2,4,6,8,10
 	std::vector<int> neighboursVec;
 	NeighboursList& neighboursList = _adjacencyList[u];
 	std::transform(neighboursList.begin(), neighboursList.end(), std::back_inserter(neighboursVec),
@@ -35,7 +34,7 @@ int AdjacencyList::weight(int u, int v)
 	auto it = std::find_if(neighboursList.begin(), neighboursList.end(), [v](const Adjacency& adj) { return v == adj.v; });
 
 	if(neighboursList.end() == it)
-	throw std::exception("Not found (u,v) edge");
+		throw std::exception("Not found edge");
 
 	return it->weight;
 }

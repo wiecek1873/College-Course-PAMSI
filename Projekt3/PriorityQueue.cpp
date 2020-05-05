@@ -23,7 +23,7 @@ void PriorityQueue::decreasePriority(int which, int value)
 	auto it = std::find_if(container.begin(), container.end(), [which](const pi& pair) { return which == pair.second; });
 
 	if (container.end() == it)
-		throw std::exception("Not found edge");
+		throw std::exception("Not found");
 
 	(*it).first = value;
 }

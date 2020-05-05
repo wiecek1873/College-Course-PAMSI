@@ -10,10 +10,9 @@ class PriorityQueue
 public:
 	std::vector<pi> container;
 public:
+	PriorityQueue() {};
 	void push(pi element);
 	pi pop();
-
 	bool empty();
 	void decreasePriority(int which, int value);
-	PriorityQueue() {};
 };
