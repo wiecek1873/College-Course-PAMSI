@@ -51,7 +51,7 @@ void Tests<T>::testDijkstraTime()
 		file.open("Matrix.txt", std::ios::out);
 
 	int stage = 1; //Display of progression
-	int sizes[] = {10,50,100,150,200};
+	int sizes[] = {10,50,100,250,500};
 	float densities[] = {0.25,0.5,0.75,1};
 
 	for (int size : sizes)
