@@ -7,21 +7,21 @@ int main()
 	Board board;
 	Player player1(true);
 	Player player2(false);
+	board.move(5, 2, 4, 3);
+	board.move(2, 5, 3, 4);
 	board._board(4, 3) = 3;
-	board._board(7, 0) = 2;
-	board._board(2, 1) = 0;
-	board._board(2, 3) = 0;
-	board._board(2, 5) = 0;
+	board._board(1, 0) = 0;
+	board._board(6, 5) = 0;
+	board.move(5, 6, 4, 5);
+	board.move(3, 4, 5, 6);
 	board.transformIntoKings();
-	board.move(1, 6, 3, 4);
-	board.beat(4, 3, 1, 6);
-	auto xd = player1.availableMoves(board, 4, 3);
+	board.print();
+
+	auto xd = player1.checkBeats(board, 5,6);
 	for (auto it = xd.begin(); it != xd.end(); ++it)
 	{
-		std::cout << (*it).first << " " << (*it).second << std::endl;
+		std::cout << "Mo¿liwe ruchy:" << (*it).first << " " << (*it).second << std::endl;
 	}
-
-	board.print();
 	//system("CLS");
 
 

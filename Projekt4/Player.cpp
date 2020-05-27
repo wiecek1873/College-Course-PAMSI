@@ -126,103 +126,110 @@ std::vector<std::pair<int, int>> Player::kingsLeft(Board board)
 std::vector<std::pair<int, int>> Player::availableMoves(Board board, int x, int y)
 {
 	std::vector<std::pair<int, int>> moves;
-	std::vector<std::pair<int, int>> surroundings;
-	if (board._board(x, y) == 1 || board._board(x, y) == 2)
+	int directionStart = 0; //0 - up left corner, 1 - up right corner etc.
+	int directionEnd = 0; //4 - check every direction
+	int range = 0; //2 - range for normal mans, 8 - range for kings
+	if (board._board(x, y) == 1)
 	{
-		surroundings.push_back(std::make_pair(x - 1, y - 1));
-		surroundings.push_back(std::make_pair(x - 1, y + 1));
-		surroundings.push_back(std::make_pair(x + 1, y - 1));
-		surroundings.push_back(std::make_pair(x + 1, y + 1));
+		directionStart = 0;
+		directionEnd = 2;
+		range = 2;
+	}
+	if(board._board(x,y) == 2)
+	{
+		directionStart = 2;
+		directionEnd = 4;
+		range = 2;
 	}
 	if (board._board(x, y) == 3 || board._board(x, y) == 4)
 	{
-		bool obstacleFlag[] = { false,false,false,false };
-		for (int i = 1; i < 8; ++i)
-		{
-			if (0 <= x - i && x - i < 8 &&
-				0 <= y - i && y - i < 8 &&
-				board._board(x - i, y - i) != 0)
-				obstacleFlag[0] = true;
-			if (!obstacleFlag[0])
-				surroundings.push_back(std::make_pair(x - i, y - i));
-
-			if (0 <= x - i && x - i < 8 &&
-				0 <= y + i && y + i < 8 &&
-				board._board(x - i, y + i) != 0)
-				obstacleFlag[1] = true;
-			if (!obstacleFlag[1])
-				surroundings.push_back(std::make_pair(x - i, y + i));
-
-			if (0 <= x + i && x + i < 8 &&
-				0 <= y - i && y - i < 8 &&
-				board._board(x + i, y + i) != 0)
-				obstacleFlag[2] = true;
-			if (!obstacleFlag[2])
-				surroundings.push_back(std::make_pair(x + i, y - i));
-
-			if (0 <= x + i && x + i < 8 &&
-				0 <= y + i && y + i < 8 &&
-				board._board(x + i, y + i) != 0)
-				obstacleFlag[3] = true;
-			if (!obstacleFlag[3])
-				surroundings.push_back(std::make_pair(x + i, y + i));
-		}
+		directionStart = 0;
+		directionEnd = 4;
+		range = 8;
 	}
-	for (auto it = surroundings.begin(); it != surroundings.end(); ++it)
+	int multipilerX[] = { -1,-1,1,1 };
+	int multipilerY[] = { -1,1,-1,1 };
+	bool obstacleFlag[] = { false,false,false,false };
+	for (int i = 1; i < range; ++i)
 	{
-		if (0 <= (*it).first && (*it).first < 8 &&
-			0 <= (*it).second && (*it).second < 8 &&
-			board._board((*it).first, (*it).second) == 0)
-			moves.push_back(*it);
+		for (int j = directionStart; j < directionEnd; ++j)
+		{
+			if (!obstacleFlag[j] &&
+				0 <= x + multipilerX[j] * i && x + multipilerX[j] * i < 8 &&
+				0 <= y + multipilerY[j] * i && y + multipilerY[j] * i < 8)
+				if(board._board(x + multipilerX[j] * i, y + multipilerY[j] * i) != 0)
+					obstacleFlag[j] = true;
+			if (!obstacleFlag[j])
+				moves.push_back(std::make_pair(x + multipilerX[j] * i, y + multipilerY[j] * i));
+		}
 	}
 	return moves;
 }
 
 std::vector<std::pair<int, int>> Player::checkBeats(Board board, int x, int y)
 {
-	bool enemyColor = !_white;
+	std::vector<std::pair<int, int>> beats;
+	int directionStart = 0; //0 - up left corner, 1 - up right corner etc.
+	int directionEnd = 4; //4 - check every direction
+	int range = 0; //2 - range for normal mans, 8 - range for kings
 
-	std::vector<std::pair<int, int>> moves;
-	std::vector<std::pair<int, int>> surroundings;
-	surroundings.push_back(std::make_pair(x - 1, y - 1));
-	surroundings.push_back(std::make_pair(x - 1, y + 1));
-	surroundings.push_back(std::make_pair(x + 1, y - 1));
-	surroundings.push_back(std::make_pair(x + 1, y + 1));
-	for (auto it = surroundings.begin(); it != surroundings.end(); ++it)
+	int allyColor[2];
+	int enemyColor[2];
+	if (board._board(x, y) == 1)
 	{
-		if (0 <= (*it).first && (*it).first < 8 &&
-			0 <= (*it).second && (*it).second < 8 &&
-			board._board((*it).first, (*it).second) == enemyColor)
+		allyColor[0] = 1; allyColor[1] = 3;
+		enemyColor[0] = 2; enemyColor[1] = 4;
+		range = 2;
+	}
+	if (board._board(x, y) == 2)
+	{
+		allyColor[0] = 2; allyColor[1] = 4;
+		enemyColor[0] = 1; enemyColor[1] = 3;
+		range = 2;
+	}
+	if (board._board(x, y) == 3)
+	{
+		allyColor[0] = 1; allyColor[1] = 3;
+		enemyColor[0] = 2; enemyColor[1] = 4;
+		range = 8;
+	}
+	if (board._board(x, y) == 4)
+	{
+		allyColor[0] = 2; allyColor[1] = 4;
+		enemyColor[0] = 1; enemyColor[1] = 3;
+		range = 8;
+	}
+	int multipilerX[] = { -1,-1,1,1 };
+	int multipilerY[] = { -1,1,-1,1 };
+	bool obstacleFlag[] = { false,false,false,false };
+	for (int i = 1; i < range; ++i)
+	{
+		for (int j = directionStart; j < directionEnd; ++j)
 		{
-			int possiblePlaceX = 2 * (*it).first - x;
-			int possiblePlaceY = 2 * (*it).second - y;
-			if (0 <= possiblePlaceX && possiblePlaceX < 8 &&
-				0 <= possiblePlaceY && possiblePlaceY < 8 &&
-				board._board(possiblePlaceX, possiblePlaceY) == 0)
-				moves.push_back(std::make_pair(2 * (*it).first - x, 2 * (*it).second - y));
+			if (!obstacleFlag[j] &&
+				0 <= x + multipilerX[j] * i && x + multipilerX[j] * i < 8 &&
+				0 <= y + multipilerY[j] * i && y + multipilerY[j] * i < 8)
+			{
+				if (board._board(x + multipilerX[j] * i, y + multipilerY[j] * i) == allyColor[0] ||
+					board._board(x + multipilerX[j] * i, y + multipilerY[j] * i) == allyColor[1])
+					obstacleFlag[j] = true;
+				else if (board._board(x + multipilerX[j] * i, y + multipilerY[j] * i) == enemyColor[0] ||
+					board._board(x + multipilerX[j] * i, y + multipilerY[j] * i) == enemyColor[1])
+				{
+					if (0 <= x + multipilerX[j] * (i + 1) && x + multipilerX[j] * (i + 1) < 8 &&
+						0 <= y + multipilerY[j] * (i + 1) && y + multipilerY[j] * (i + 1) < 8 &&
+						board._board(x + multipilerX[j] * (i + 1), y + multipilerY[j] * (i + 1)) == 0)
+					beats.push_back(std::make_pair(x + multipilerX[j] * (i + 1), y + multipilerY[j] * (i + 1)));
+				}
+			}
 		}
 	}
-	return moves;
+	return beats;
 }
 
 std::vector<std::pair<int, int>> Player::checkKingBeats(Board board,int x, int y)
 {
-	int enemyColor[] = { 0,0 };
-	if (board._board(x, y) == 0)
-		throw std::exception("No man found");
-	if (board._board(x, y) == 3)
-	{
-		enemyColor[0] = 2;
-		enemyColor[1] = 4;
-	}
-	if (board._board(x, y) == 4)
-	{
-		enemyColor[0] = 1;
-		enemyColor[1] = 3;
-	}
-	std::vector<std::pair<int, int>> moves;
-	bool obstacleFlag[] = { false,false,false,false };
+	std::vector<std::pair<int, int>> xd;
 
-
-	return moves;
+	return xd;
 }
