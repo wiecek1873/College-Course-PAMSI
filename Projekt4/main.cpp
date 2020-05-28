@@ -1,27 +1,23 @@
 #include "Board.h"
 #include "Player.h"
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
+#include "Ai.h"
 int main()
 {
 	Board board;
-	Player player1(true);
+	Ai player1(true);
 	Player player2(false);
-	board.move(5, 2, 4, 3);
-	board.move(2, 5, 3, 4);
-	board._board(4, 3) = 3;
-	board._board(1, 0) = 0;
-	board._board(6, 5) = 0;
-	board.move(5, 6, 4, 5);
-	board.move(3, 4, 5, 6);
-	board.transformIntoKings();
-	board.print();
 
-	auto xd = player1.checkBeats(board, 5,6);
-	for (auto it = xd.begin(); it != xd.end(); ++it)
-	{
-		std::cout << "Mo¿liwe ruchy:" << (*it).first << " " << (*it).second << std::endl;
-	}
+	board.print();
+	player1.makeMove(board);
+	std::cout << std::endl;
+	board.print();
+	//for (auto it = xd.begin(); it != xd.end(); ++it)
+	//{
+	//	std::cout << std::endl;
+	//	(*it).print();
+	//	std::cout << "Wartosc planszy: " << player1.evaluate(*it) << std::endl;
+	//}
+
 	//system("CLS");
 
 

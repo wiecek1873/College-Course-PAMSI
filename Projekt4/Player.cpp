@@ -7,7 +7,7 @@ Player::Player(bool white)
 
 std::pair<int,int> Player::choseMan(Board board)
 {
-	std::vector<std::pair<int, int>> mansLeft = this->mansLeft(board);
+	std::vector<std::pair<int, int>> mansLeft = this->mansLeft(board,_white);
 	std::vector<std::pair<int, int>> availableMans;
 	for (auto it = mansLeft.begin(); it != mansLeft.end(); ++it)
 	{
@@ -91,32 +91,32 @@ void Player::move(Board& board, std::pair<int, int> whichOne)
 		board.beat(whichOne.first, whichOne.second, row, col);
 }
 
-std::vector<std::pair<int, int>> Player::mansLeft(Board board)
+std::vector<std::pair<int, int>> Player::mansLeft(Board board, bool white)
 {
 	std::vector<std::pair<int, int>> mansLeft;
 	for (int i = 0; i < 8; ++i)
 	{
 		for (int j = 0; j < 8; ++j)
 		{
-			if (_white && board._board(i, j) == 1)
+			if (white && board._board(i, j) == 1)
 				mansLeft.push_back(std::make_pair(i, j));
-			if (!_white && board._board(i, j) == 2)
+			if (!white && board._board(i, j) == 2)
 				mansLeft.push_back(std::make_pair(i, j));
 		}
 	}
 	return mansLeft;
 }
 
-std::vector<std::pair<int, int>> Player::kingsLeft(Board board)
+std::vector<std::pair<int, int>> Player::kingsLeft(Board board, bool white)
 {
 	std::vector<std::pair<int, int>> kingsLeft;
 	for (int i = 0; i < 8; ++i)
 	{
 		for (int j = 0; j < 8; ++j)
 		{
-			if (_white && board._board(i, j) == 3)
+			if (white && board._board(i, j) == 3)
 				kingsLeft.push_back(std::make_pair(i, j));
-			if (!_white && board._board(i, j) == 4)
+			if (white && board._board(i, j) == 4)
 				kingsLeft.push_back(std::make_pair(i, j));
 		}
 	}
@@ -157,9 +157,13 @@ std::vector<std::pair<int, int>> Player::availableMoves(Board board, int x, int 
 			if (!obstacleFlag[j] &&
 				0 <= x + multipilerX[j] * i && x + multipilerX[j] * i < 8 &&
 				0 <= y + multipilerY[j] * i && y + multipilerY[j] * i < 8)
-				if(board._board(x + multipilerX[j] * i, y + multipilerY[j] * i) != 0)
+			{
+				if (board._board(x + multipilerX[j] * i, y + multipilerY[j] * i) != 0)
 					obstacleFlag[j] = true;
-			if (!obstacleFlag[j])
+			}
+			if (!obstacleFlag[j] &&
+				0 <= x + multipilerX[j] * i && x + multipilerX[j] * i < 8 &&
+				0 <= y + multipilerY[j] * i && y + multipilerY[j] * i < 8)
 				moves.push_back(std::make_pair(x + multipilerX[j] * i, y + multipilerY[j] * i));
 		}
 	}
@@ -225,11 +229,4 @@ std::vector<std::pair<int, int>> Player::checkBeats(Board board, int x, int y)
 		}
 	}
 	return beats;
-}
-
-std::vector<std::pair<int, int>> Player::checkKingBeats(Board board,int x, int y)
-{
-	std::vector<std::pair<int, int>> xd;
-
-	return xd;
 }
