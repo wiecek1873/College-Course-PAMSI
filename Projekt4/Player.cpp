@@ -11,8 +11,16 @@ std::pair<int,int> Player::choseMan(Board board)
 	std::vector<std::pair<int, int>> availableMans;
 	for (auto it = mansLeft.begin(); it != mansLeft.end(); ++it)
 	{
-		if (this->availableMoves(board,(*it).first, (*it).second).size() != 0)
+		if (this->checkBeats(board,(*it).first, (*it).second).size() != 0)
 			availableMans.push_back(*it);
+	}
+	if (availableMans.size() == 0)
+	{
+		for (auto it = mansLeft.begin(); it != mansLeft.end(); ++it)
+		{
+			if (this->availableMoves(board, (*it).first, (*it).second).size() != 0)
+				availableMans.push_back(*it);
+		}
 	}
 	bool rightChoice = false;
 	int row;
@@ -38,21 +46,27 @@ std::pair<int,int> Player::choseMan(Board board)
 			!= availableMans.end())
 			rightChoice = true;
 		else
+		{
+			system("CLS");
+			board.print();
 			std::cout << "Wrong choice!" << std::endl;
+		}
 	} while (!rightChoice);
 	return std::make_pair(row, col);
 }
 
-void Player::move(Board& board, std::pair<int, int> whichOne)
+void Player::move(Board& board)
 {
-	auto availableMoves = this->availableMoves(board,whichOne.first, whichOne.second);
-	auto availableBeats = this->checkBeats(board,whichOne.first, whichOne.second);
+	std::pair<int, int> whichOne;
+	bool rightMove = false;
+	bool beatFlag = false;
 	int row;
 	int col;
-	bool rightMove = false;
-	bool rightBeat = false;
 	do
 	{
+		std::pair<int, int> chosenMan = choseMan(board);
+		auto availableBeats = this->checkBeats(board, chosenMan.first, chosenMan.second);
+		auto availableMoves = this->availableMoves(board, chosenMan.first, chosenMan.second);
 		std::cout << "Where you like to move?" << std::endl;
 		std::cout << "Move to: ";
 		do
@@ -67,29 +81,85 @@ void Player::move(Board& board, std::pair<int, int> whichOne)
 			std::cin >> col;
 		} while (std::cin.fail());
 
-		if (std::find_if(availableMoves.begin(), availableMoves.end(),
-			[row, col](const std::pair<int, int>& pair) {return pair == std::make_pair(row, col);})
-			!= availableMoves.end())
-			rightMove = true;
+		if (availableBeats.size() == 0)
+		{
+			if (std::find_if(availableMoves.begin(), availableMoves.end(),
+				[row, col](const std::pair<int, int>& pair) {return pair == std::make_pair(row, col);})
+				!= availableMoves.end())
+				rightMove = true;
+			else
+				rightMove = false;
+		}
 		else
-			rightMove = false;
+		{
+			beatFlag = true;
 
-		if (std::find_if(availableBeats.begin(), availableBeats.end(),
-			[row, col](const std::pair<int, int>& pair) {return pair == std::make_pair(row, col);})
-			!= availableBeats.end())
-			rightBeat = true;
-		else
-			rightBeat = false;
-
-		if (!rightMove && !rightBeat)
+			if (std::find_if(availableBeats.begin(), availableBeats.end(),
+				[row, col](const std::pair<int, int>& pair) {return pair == std::make_pair(row, col);})
+				!= availableBeats.end())
+				rightMove = true;
+			else
+				rightMove = false;
+		}
+		if (!rightMove)
+		{
+			system("CLS");
+			board.print();
 			std::cout << "Can't move here!" << std::endl;
-
-	} while (!rightMove && !rightBeat);
-	if(rightMove)
-		board.move(whichOne.first, whichOne.second, row, col);
-	if (rightBeat)
+		}
+		whichOne = chosenMan;
+	} while (!rightMove);
+	if (beatFlag)
+	{
 		board.beat(whichOne.first, whichOne.second, row, col);
+		while (checkBeats(board, row, col).size() != 0)
+		{
+			system("CLS");
+			board.print();
+			do
+			{
+				//W tym miejscu moze wystapic bug
+				// jesli gracz bedzie chcial zbic pionkiem poza zasieg planszy
+				// program sie wysypie
+				auto availableBeats = this->checkBeats(board, row, col);
+				whichOne = std::make_pair(row, col);
+				std::cout << "Where you like to move?" << std::endl;
+				std::cout << "Move to: ";
+				do
+				{
+					if (std::cin.fail())
+					{
+						std::cin.clear();
+						std::cin.ignore(1000, '\n');
+						std::cout << "Wrong input!" << std::endl;
+					}
+					std::cin >> row;
+					std::cin >> col;
+				} while (std::cin.fail());
+
+				beatFlag = true;
+
+				if (std::find_if(availableBeats.begin(), availableBeats.end(),
+					[row, col](const std::pair<int, int>& pair) {return pair == std::make_pair(row, col);})
+					!= availableBeats.end())
+					rightMove = true;
+				else
+					rightMove = false;
+
+				if (!rightMove)
+				{
+					system("CLS");
+					board.print();
+					std::cout << "Can't move here!" << std::endl;
+				}
+			} while (!rightMove);
+			board.beat(whichOne.first, whichOne.second, row, col);
+		}
+	}
+	else
+		board.move(whichOne.first, whichOne.second, row, col);
 }
+
 
 std::vector<std::pair<int, int>> Player::mansLeft(Board board, bool white)
 {

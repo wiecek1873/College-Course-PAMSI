@@ -6,19 +6,23 @@ int main()
 	Board board;
 	Ai player1(true);
 	Player player2(false);
+	while (!board.gameIsFinished())
+	{
+		player1.makeMove(board);
+		board.transformIntoKings();
+		board.print();
 
-	board.print();
-	player1.makeMove(board);
-	std::cout << std::endl;
-	board.print();
-	//for (auto it = xd.begin(); it != xd.end(); ++it)
-	//{
-	//	std::cout << std::endl;
-	//	(*it).print();
-	//	std::cout << "Wartosc planszy: " << player1.evaluate(*it) << std::endl;
-	//}
+		player2.move(board);
+		board.transformIntoKings();
+		system("CLS");
+	}
 
-	//system("CLS");
+	std::cout << "Fajna giereczka byla" << std::endl;
+
+
+
+	
+
 
 
 }

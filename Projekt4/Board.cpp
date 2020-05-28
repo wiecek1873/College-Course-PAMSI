@@ -25,6 +25,28 @@ Board::Board() : _board(8,8)
 	}
 }
 
+bool Board::gameIsFinished()
+{
+	int white = 0;
+	int black = 0;
+
+	for (int i = 0; i < 8; ++i)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			if (_board(i, j) == 1 || _board(i, j) == 3)
+				++white;
+			if (_board(i, j) == 2 || _board(i, j) == 4)
+				++black;
+		}
+	}
+
+	if (white == 0 || black == 0)
+		return true;
+	else
+		return false;
+}
+
 void Board::transformIntoKings()
 {
 	for (int i = 0; i < 8; ++i)

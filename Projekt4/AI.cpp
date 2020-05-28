@@ -6,6 +6,8 @@ int Ai::evaluate(Board board)
 	int enemyKings = kingsLeft(board, !_white).size();
 	int allyMans = mansLeft(board, _white).size();
 	int allyKings = kingsLeft(board, _white).size();
+	if (enemyMans == 0 && enemyKings == 0)
+		return 500;
 	return static_cast<int>(10 * allyMans -  5 * enemyMans + 20 * allyKings - 15 * enemyKings);
 }
 
@@ -16,7 +18,7 @@ Board Ai::checkBeatsAndBeat(Board& board, int x, int y)
 	{
 		return board;
 	}
-	//Niestety nie wpad³em na pomys³ w jaki sposób zbijaæ kolejne pionki jeœli jest wiêcej ni¿ jedna mo¿liwoœæ.
+	//Niestety nie wpad³em na PROSTY pomys³ w jaki sposób zbijaæ kolejne pionki jeœli jest wiêcej ni¿ jedna mo¿liwoœæ.
 	//Jesli jest wiecej niz jeden kierunek bicia to funkcja bêdzie wybierac pierwszy zaczynajac od lewego górnego rogu
 	//i przechodz¹c po nich wed³ug ruchu wskazówek zegara.
 	else
@@ -95,7 +97,6 @@ std::vector<Board> Ai::moveChilds(Board board, bool white)
 	}
 	for (auto it = moves.begin(); it < moves.end(); ++it)
 	{
-		//std::cout << (*it).first.first << " " << (*it).first.second << " " << (*it).second.first << " " << (*it).second.second << std::endl;
 		Board tempBoard(board);
 		tempBoard.move((*it).first.first, (*it).first.second, (*it).second.first, (*it).second.second);
 		tempBoard.transformIntoKings();

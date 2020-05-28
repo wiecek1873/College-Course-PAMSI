@@ -16,10 +16,13 @@ public:
 	Matrix _board;
 	Board();
 
+	bool gameIsFinished();
 	void transformIntoKings();
 	void print();
 
 	void move(int x, int y, int toX, int toY);
 	void beat(int x, int y, int toX, int toY);
+
+
 };
 
