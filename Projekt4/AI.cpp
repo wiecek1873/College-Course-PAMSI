@@ -172,7 +172,7 @@ void Ai::makeMove(Board& board)
 		minimaxValue.resize(boardsWithBeat.size());
 		for (unsigned int i = 0; i < boardsWithBeat.size(); ++i)
 		{
-			minimaxValue[i] = minimax(boardsWithBeat[i], 4, false);
+			minimaxValue[i] = minimax(boardsWithBeat[i], 6, false);
 		}
 		int maxElementIndex = std::max_element(minimaxValue.begin(), minimaxValue.end()) - minimaxValue.begin();
 		board = boardsWithBeat[maxElementIndex];
@@ -184,7 +184,7 @@ void Ai::makeMove(Board& board)
 		minimaxValue.resize(boardsWithMove.size());
 		for (unsigned int i = 0; i < boardsWithMove.size(); ++i)
 		{
-			minimaxValue[i] = minimax(boardsWithMove[i], 4, false);
+			minimaxValue[i] = minimax(boardsWithMove[i], 6, false);
 		}
 		int maxElementIndex = std::max_element(minimaxValue.begin(), minimaxValue.end()) - minimaxValue.begin();
 		board = boardsWithMove[maxElementIndex];

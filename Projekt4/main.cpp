@@ -11,6 +11,7 @@ int main()
 	while (!board.gameIsFinished())
 	{
 		player1.makeMove(board);
+
 		board.transformIntoKings();
 		board.print();
 
