@@ -1,11 +1,13 @@
 #include "Board.h"
 #include "Player.h"
 #include "Ai.h"
+
 int main()
 {
 	Board board;
 	Ai player1(true);
 	Player player2(false);
+
 	while (!board.gameIsFinished())
 	{
 		player1.makeMove(board);
@@ -16,17 +18,10 @@ int main()
 		board.transformIntoKings();
 		system("CLS");
 	}
-
-	std::cout << "Fajna giereczka byla" << std::endl;
-
-
-
-	
-
-
-
+	std::cout << "Game is finished!" << std::endl;
 }
 
+//Zostawilem kod ktory mial byc odpowiedzialny za wersje graficzna na wypadek gdybym chcial skonczyc ja w przyszlosci
 /*
 	sf::RenderWindow window(sf::VideoMode(800, 800), "Checkers");
 

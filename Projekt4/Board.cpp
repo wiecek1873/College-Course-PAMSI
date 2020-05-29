@@ -40,7 +40,6 @@ bool Board::gameIsFinished()
 				++black;
 		}
 	}
-
 	if (white == 0 || black == 0)
 		return true;
 	else

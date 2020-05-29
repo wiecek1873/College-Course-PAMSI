@@ -16,13 +16,16 @@ public:
 	Matrix _board;
 	Board();
 
+	//Sprawdza czy gra zostala zakonczona tj. na planszy sa tylko pionki jednego koloru
 	bool gameIsFinished();
+	//Zamienia piony ktore przeszly na krance planszy w damki
 	void transformIntoKings();
+	//Drukuje aktualny stan planszy na konsoli
 	void print();
 
+	//Wykonuje ruch pionem z (x,y) na (toX,toY)
 	void move(int x, int y, int toX, int toY);
+	//Wykonuje ruch pionem z (x,y) na (toX,toY) i usuwa przeskoczone piony przeciwnika
 	void beat(int x, int y, int toX, int toY);
-
-
 };
 

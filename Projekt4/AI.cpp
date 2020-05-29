@@ -19,6 +19,7 @@ Board Ai::checkBeatsAndBeat(Board& board, int x, int y)
 		return board;
 	}
 	//Niestety nie wpad³em na PROSTY pomys³ w jaki sposób zbijaæ kolejne pionki jeœli jest wiêcej ni¿ jedna mo¿liwoœæ.
+	//W dodatku zwracac do tych mozliwosci osobne plansze.
 	//Jesli jest wiecej niz jeden kierunek bicia to funkcja bêdzie wybierac pierwszy zaczynajac od lewego górnego rogu
 	//i przechodz¹c po nich wed³ug ruchu wskazówek zegara.
 	else
@@ -28,7 +29,7 @@ Board Ai::checkBeatsAndBeat(Board& board, int x, int y)
 	}
 }
 
-std::vector<Board> Ai::beatChilds(Board board, bool white)
+std::vector<Board> Ai::beatChildren(Board board, bool white)
 {
 	std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> beats;
 	std::vector<Board> boards;
@@ -67,7 +68,7 @@ std::vector<Board> Ai::beatChilds(Board board, bool white)
 	return boards;
 }
 
-std::vector<Board> Ai::moveChilds(Board board, bool white)
+std::vector<Board> Ai::moveChildren(Board board, bool white)
 {
 	std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> moves;
 	std::vector<Board> boards;
@@ -115,7 +116,7 @@ int Ai::minimax(Board board, int depth, bool maximizingPlayer)
 	if (maximizingPlayer)
 	{
 		int maxEval = -10000;
-		auto beats = beatChilds(board, maximizingPlayer);
+		auto beats = beatChildren(board, maximizingPlayer);
 		if (beats.size() > 0)
 		{
 			for (auto it = beats.begin(); it < beats.end(); ++it)
@@ -127,7 +128,7 @@ int Ai::minimax(Board board, int depth, bool maximizingPlayer)
 		}
 		else
 		{
-			auto moves = moveChilds(board, maximizingPlayer);
+			auto moves = moveChildren(board, maximizingPlayer);
 			for (auto it = moves.begin(); it < moves.end(); ++it)
 			{
 				int eval = minimax(*it, depth - 1, false);
@@ -139,7 +140,7 @@ int Ai::minimax(Board board, int depth, bool maximizingPlayer)
 	else
 	{
 		int minEval = +10000;
-		auto beats = beatChilds(board, maximizingPlayer);
+		auto beats = beatChildren(board, maximizingPlayer);
 		if (beats.size() > 0)
 		{
 			for (auto it = beats.begin(); it < beats.end(); ++it)
@@ -151,7 +152,7 @@ int Ai::minimax(Board board, int depth, bool maximizingPlayer)
 		}
 		else
 		{
-			auto moves = moveChilds(board, maximizingPlayer);
+			auto moves = moveChildren(board, maximizingPlayer);
 			for (auto it = moves.begin(); it < moves.end(); ++it)
 			{
 				int eval = minimax(*it, depth - 1, true);
@@ -164,7 +165,7 @@ int Ai::minimax(Board board, int depth, bool maximizingPlayer)
 
 void Ai::makeMove(Board& board)
 {
-	auto boardsWithBeat = beatChilds(board, _white);
+	auto boardsWithBeat = beatChildren(board, _white);
 	if(boardsWithBeat.size() > 0)
 	{
 		std::vector<int> minimaxValue;
@@ -178,7 +179,7 @@ void Ai::makeMove(Board& board)
 	}
 	else
 	{
-		auto boardsWithMove = moveChilds(board, _white);
+		auto boardsWithMove = moveChildren(board, _white);
 		std::vector<int> minimaxValue;
 		minimaxValue.resize(boardsWithMove.size());
 		for (unsigned int i = 0; i < boardsWithMove.size(); ++i)
